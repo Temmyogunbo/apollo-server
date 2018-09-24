@@ -1,0 +1,67 @@
+{
+  "name": "challenge1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node build/index.js",
+    "start:dev": "nodemon build/index.js",
+    "tslint": "tslint 'src/**/*.ts' ",
+    "test": "jest --maxWorkers=2",
+    "build": "babel ./src  --out-dir ./build --copy-files  --extensions \".ts\"  --extensions \".js\"",
+    "build:watch": "yarn build --watch",
+    "migrate": "sequelize db:migrate"
+  },
+  "author": "Emmanuel Ogunbo",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/plugin-transform-typescript": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@babel/runtime": "^7.0.0",
+    "apollo-server": "^2.1.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-plugin-add-module-exports": "^1.0.0",
+    "babel-plugin-graphql": "^2.0.2",
+    "babel-plugin-import-graphql": "^2.6.2",
+    "babel-plugin-inline-import": "^3.0.0",
+    "bcrypt": "^3.0.1",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "graphql": "^14.0.2",
+    "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.11",
+    "mysql2": "^1.6.1",
+    "sequelize": "^4.38.1",
+    "typescript": "^3.0.3"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.4",
+    "sequelize-cli": "^4.1.1",
+    "ts-jest": "^23.10.1",
+    "tslint": "^5.11.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{ts}",
+      "!**/*.d.ts",
+      "!src/database/**/*",
+      "!src/api/**/*.{graphql}"
+    ],
+    "collectCoverage": true,
+    "transform": {
+      ".(ts)": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+version: "3"
+services:
+  app:
+    build: .
+    command:
+      [
+        "./wait-for-it/wait-for-it.sh",
+        "172.19.0.1:3306",
+        "--",
+        "npm",
+        "run",
+        "migrate",
+      ]
+    ports:
+      - "3000:4000"
+    environment:
+      - APP_SECRET=${APP_SECRET}
+      - DB_DEV_HOST=${DB_DEV_HOST}
+      - DB_DEV_NAME=${DB_DEV_NAME}
+      - DB_DEV_USERNAME=${DB_DEV_USERNAME}
+      - DB_HOST=172.19.0.1
+    depends_on:
+      - db
+  db:
+    image: mysql:5
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_DEV_PASSWORD}
+      - MYSQL_DATABASE=${DB_DEV_NAME}
+      - MYSQL_USER=${DB_DEV_USERNAME}
