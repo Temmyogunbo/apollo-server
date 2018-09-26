@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "node build/index.js",
-    "start:dev": "nodemon build/index.js",
+    "start:dev": "nodemon ../build/index.js",
     "tslint": "tslint 'src/**/*.ts' ",
     "test": "jest --maxWorkers=2",
-    "build": "babel ./src  --out-dir ./build --copy-files  --extensions \".ts\"  --extensions \".js\"",
+    "build": "babel ./src  --out-dir ../build --copy-files  --extensions \".ts\"  --extensions \".js\"",
     "build:watch": "yarn build --watch",
-    "migrate": "sequelize db:migrate"
+    "migrate": "sequelize db:migrate",
+    "cleardb": "cross-env NODE_ENV=test && cd ../build/database sequelize db:migrate:undo:all",
+    "pretest": "npm run cleardb && cd ../build/database && cross-env NODE_ENV=test sequelize db:migrate  && cross-env NODE_ENV=test sequelize db:seed:all"
   },
   "author": "Emmanuel Ogunbo",
   "license": "ISC",
@@ -30,6 +32,7 @@
     "babel-plugin-inline-import": "^3.0.0",
     "bcrypt": "^3.0.1",
     "body-parser": "^1.18.3",
+    "cross-env": "^5.2.0",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "graphql": "^14.0.2",
@@ -62,6 +65,9 @@
       "ts",
       "js",
       "json"
-    ]
+    ],
+    "moduleNameMapper": {
+      "^sequelize$": "<rootDir>/node_modules/sequelize"
+    }
   }
 }

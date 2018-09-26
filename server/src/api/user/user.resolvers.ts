@@ -13,14 +13,12 @@ export const createUser = async (
   secret: any,
 ): Promise<any> => {
   try {
-    console.log(userModel, '++++y', userInput)
     const user = await userModel.create(userInput);
     return {
       token: createToken({ userId: user.id }, secret, "90m"),
       user: user.get(),
     };
   } catch (error) {
-    console.log(error)
     if (error.name === "SequelizeUniqueConstraintError") {
       throw new Error(error.errors[0].message);
     }

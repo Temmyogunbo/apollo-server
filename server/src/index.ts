@@ -6,7 +6,6 @@ import typeDefs from "./api/user/user.graphql";
 import userResolvers from "./api/user/user.resolvers";
 import models from "./database/models";
 import { getMe } from "./utils/getMe";
-
 dotenv.config();
 
 const server = new ApolloServer({

@@ -3,3 +3,4 @@ build
 .env
 coverage
 env_files
+data
