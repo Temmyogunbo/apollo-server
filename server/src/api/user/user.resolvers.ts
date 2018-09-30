@@ -1,3 +1,4 @@
+import { UserInputError } from "apollo-server";
 import * as jwt from "jsonwebtoken";
 
 import { IContext } from "../../utils/utils";
@@ -20,7 +21,7 @@ export const createUser = async (
     };
   } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
-      throw new Error(error.errors[0].message);
+      throw new UserInputError(error.errors[0].message);
     }
   }
 };
